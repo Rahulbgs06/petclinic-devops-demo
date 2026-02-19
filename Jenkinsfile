@@ -7,7 +7,7 @@ pipeline {
 
     environment {
         DOCKER_IMAGE = "petclinic-demo"
-        WEB_PORT = "8081"
+        WEB_PORT = "8082"
     }
 
     stages {

@@ -49,7 +49,7 @@ public class SeleniumTest {
 	@Test
 	public void openHomePage() {
 		// Navigate to PetClinic home page
-		driver.get("http://localhost:8081/");
+		driver.get("http://localhost:8082/");
 
 		// Wait for navbar to appear
 		WebElement navbar = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".navbar-brand")));
