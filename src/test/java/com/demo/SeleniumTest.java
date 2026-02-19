@@ -20,6 +20,8 @@ public class SeleniumTest {
 	private WebDriver driver;
 
 	private WebDriverWait wait;
+	
+	String port = System.getProperty("app.port", "8082");
 
 	@BeforeMethod
 	public void setUp() {
@@ -49,7 +51,7 @@ public class SeleniumTest {
 	@Test
 	public void openHomePage() {
 		// Navigate to PetClinic home page port changed
-		driver.get("http://localhost:8082/");
+		driver.get("http://localhost:"+port);
 
 		// Wait for navbar to appear
 		WebElement navbar = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".navbar-brand")));

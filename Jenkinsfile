@@ -49,7 +49,8 @@ pipeline {
 
         stage('Run Tests') {
             steps {
-                sh './gradlew test'
+                // Pass port as system property to tests
+                sh "./gradlew test -Dapp.port=${WEB_PORT}"
             }
         }
     }
