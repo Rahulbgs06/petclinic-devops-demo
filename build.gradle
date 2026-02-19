@@ -77,9 +77,9 @@ dependencies {
   checkstyle "com.puppycrawl.tools:checkstyle:${checkstyleVersion}"
 }
 
-tasks.named('test') {
-  useJUnitPlatform()
-}
+//tasks.named('test') {
+//  useJUnitPlatform()
+//}
 
 checkstyle {
   configDirectory = project.file('src/checkstyle')
@@ -124,5 +124,8 @@ test {
         events "passed", "skipped", "failed"
         showStandardStreams = true
     }
+
+    // Pass system properties from command line
+    systemProperties System.getProperties()
 }
 

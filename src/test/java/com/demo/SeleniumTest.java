@@ -21,6 +21,7 @@ public class SeleniumTest {
 
 	private WebDriverWait wait;
 	
+	//dynamic port
 	String port = System.getProperty("app.port", "8082");
 
 	@BeforeMethod
