@@ -31,27 +31,24 @@ pipeline {
 
         stage('Stop Existing Container') {
             steps {
-                sh "docker ps -q --filter name=${DOCKER_IMAGE} | xargs -r docker stop"
-                sh "docker ps -a -q --filter name=${DOCKER_IMAGE} | xargs -r docker rm"
+                sh "docker rm -f ${DOCKER_IMAGE} || true"
             }
         }
 
         stage('Run Docker Container') {
             steps {
-                // THIS COMMAND STARTS YOUR APP INSIDE CONTAINER
                 sh "docker run -d -p ${WEB_PORT}:8080 --name ${DOCKER_IMAGE} ${DOCKER_IMAGE}"
             }
         }
 
         stage('Wait for App to Start') {
             steps {
-                sh 'sleep 15'  // Give app time to initialize
+                sh 'sleep 15'
             }
         }
 
         stage('Run Tests') {
             steps {
-                // Tests will run against your running app on port 8081
                 sh './gradlew test'
             }
         }
