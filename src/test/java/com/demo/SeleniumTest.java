@@ -48,7 +48,7 @@ public class SeleniumTest {
 
 	@Test
 	public void openHomePage() {
-		// Navigate to PetClinic home page
+		// Navigate to PetClinic home page port changed
 		driver.get("http://localhost:8082/");
 
 		// Wait for navbar to appear
