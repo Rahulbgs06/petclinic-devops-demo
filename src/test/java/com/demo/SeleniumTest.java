@@ -17,44 +17,45 @@ import static org.testng.Assert.assertTrue;
 
 public class SeleniumTest {
 
-    private WebDriver driver;
-    private WebDriverWait wait;
+	private WebDriver driver;
 
-    @BeforeMethod
-    public void setUp() {
-        // Setup ChromeDriver automatically
-        WebDriverManager.chromedriver().setup();
-        driver = new ChromeDriver();
-        driver.manage().window().maximize();
+	private WebDriverWait wait;
 
-        // Explicit wait tied to this driver
-        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-    }
+	@BeforeMethod
+	public void setUp() {
+		// Setup ChromeDriver automatically
+		WebDriverManager.chromedriver().setup();
+		driver = new ChromeDriver();
+		driver.manage().window().maximize();
 
-    @AfterMethod
-    public void tearDown() {
-        if (driver != null) {
-            try {
-                // Pause 5 seconds to see the browser
-                Thread.sleep(5000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            driver.quit();
-        }
-    }
+		// Explicit wait tied to this driver
+		wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+	}
 
-    @Test
-    public void openHomePage() {
-        // Navigate to PetClinic home page
-        driver.get("http://localhost:8080/");
+	@AfterMethod
+	public void tearDown() {
+		if (driver != null) {
+			try {
+				// Pause 5 seconds to see the browser
+				Thread.sleep(5000);
+			}
+			catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			driver.quit();
+		}
+	}
 
-        // Wait for navbar to appear
-        WebElement navbar = wait.until(
-            ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".navbar-brand"))
-        );
+	@Test
+	public void openHomePage() {
+		// Navigate to PetClinic home page
+		driver.get("http://localhost:8080/");
 
-        // Assert navbar is visible
-        assertTrue(navbar.isDisplayed(), "Navbar should be visible on the home page");
-    }
+		// Wait for navbar to appear
+		WebElement navbar = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".navbar-brand")));
+
+		// Assert navbar is visible
+		assertTrue(navbar.isDisplayed(), "Navbar should be visible on the home page");
+	}
+
 }
