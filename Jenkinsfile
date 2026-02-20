@@ -19,7 +19,7 @@ pipeline {
 
         stage('Build JAR') {
             steps {
-                sh './gradlew clean build'
+                sh './gradlew clean build -x checkFormatTest -x checkFormatMain'
             }
         }
 

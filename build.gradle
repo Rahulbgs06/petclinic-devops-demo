@@ -55,31 +55,29 @@ dependencies {
   testImplementation 'org.testcontainers:testcontainers-junit-jupiter'
   testImplementation 'org.testcontainers:testcontainers-mysql'
     // Selenium for UI tests
-    // TestNG
-  testImplementation 'org.testng:testng:7.9.0'
-
+    // Add JUnit 5 (Spring Boot already includes it, but explicit is fine)
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    
     // Selenium
-  testImplementation 'org.seleniumhq.selenium:selenium-java:4.14.0'
-
+    testImplementation 'org.seleniumhq.selenium:selenium-java:4.27.0'
+    
     // WebDriverManager
-  testImplementation 'io.github.bonigarcia:webdrivermanager:5.5.3'
+    testImplementation 'io.github.bonigarcia:webdrivermanager:5.9.2'
+    
+//  testImplementation 'org.testng:testng:7.7.1'
 
     // Logging (if needed)
   implementation 'org.apache.logging.log4j:log4j-api:2.20.0'
   implementation 'org.apache.logging.log4j:log4j-core:2.20.0'
-
-
-    
-
   
   
   checkstyle "io.spring.javaformat:spring-javaformat-checkstyle:${springJavaformatCheckstyleVersion}"
   checkstyle "com.puppycrawl.tools:checkstyle:${checkstyleVersion}"
 }
 
-//tasks.named('test') {
-//  useJUnitPlatform()
-//}
+  tasks.named('test') {
+  useJUnitPlatform()
+}
 
 checkstyle {
   configDirectory = project.file('src/checkstyle')
@@ -113,8 +111,11 @@ jar {
 }
 
 test {
-    useTestNG()
-
+    useJUnitPlatform()
+    
+    // Force the test executor to use Java 17
+    executable = "/Library/Java/JavaVirtualMachines/temurin-17.jdk/Contents/Home/bin/java"
+    
     reports {
         junitXml.required.set(true)
         html.required.set(true)

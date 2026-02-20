@@ -7,40 +7,33 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import io.github.bonigarcia.wdm.WebDriverManager;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
+import org.junit.jupiter.api.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.time.Duration;
-
-import static org.testng.Assert.assertTrue;
 
 public class SeleniumTest {
 
 	private WebDriver driver;
 
 	private WebDriverWait wait;
-	
-	//dynamic port
+
+	// Dynamic port
 	String port = System.getProperty("app.port", "8082");
 
-	@BeforeMethod
+	@BeforeEach
 	public void setUp() {
-		// Setup ChromeDriver automatically
-		WebDriverManager.chromedriver().setup();
+		// WebDriverManager.chromedriver().setup();
 		driver = new ChromeDriver();
 		driver.manage().window().maximize();
-
-		// Explicit wait tied to this driver
 		wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 	}
 
-	@AfterMethod
+	@AfterEach
 	public void tearDown() {
 		if (driver != null) {
 			try {
-				// Pause 5 seconds to see the browser
-				Thread.sleep(5000);
+				Thread.sleep(5000); // Pause to see the browser
 			}
 			catch (InterruptedException e) {
 				e.printStackTrace();
@@ -51,8 +44,8 @@ public class SeleniumTest {
 
 	@Test
 	public void openHomePage() {
-		// Navigate to PetClinic home page port changed
-		driver.get("http://localhost:"+port);
+		// Navigate to PetClinic home page
+		driver.get("http://localhost:" + port);
 
 		// Wait for navbar to appear
 		WebElement navbar = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".navbar-brand")));
