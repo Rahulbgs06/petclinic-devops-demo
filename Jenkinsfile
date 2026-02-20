@@ -55,6 +55,7 @@ pipeline {
         }
     }
 
+	//success scenario
     post {
         success {
             echo 'Pipeline completed successfully!'
