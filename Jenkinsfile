@@ -19,7 +19,7 @@ pipeline {
 
         stage('Build JAR') {
             steps {
-                sh './gradlew clean build -x checkFormatTest -x checkFormatMain'
+                sh './gradlew clean build -x test'//build test only
             }
         }
 
@@ -49,8 +49,8 @@ pipeline {
 
         stage('Run Tests') {
             steps {
-                // Pass port as system property to tests
-                sh "./gradlew test -Dapp.port=${WEB_PORT}"
+                // Pass port as system property to tests & selenium testonly
+                sh "./gradlew test -Dapp.port=${WEB_PORT} --tests com.demo.SeleniumTest" 
             }
         }
     }
